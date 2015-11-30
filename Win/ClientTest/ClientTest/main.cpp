@@ -10,6 +10,7 @@
 int
 main()
 {
+  std::cout << inet_addr("192.168.1.1");
   WSAData wsaData;
   sockaddr_in server;
   SOCKET sock;

@@ -28,7 +28,7 @@ main()
   if (sock0 == INVALID_SOCKET) return -1;
 
   addr.sin_family = AF_INET;
-  addr.sin_port = htons(12345);
+  addr.sin_port = htons(73591);
   addr.sin_addr.S_un.S_addr = INADDR_ANY;
   bind(sock0, (sockaddr*)&addr, sizeof(addr));
 

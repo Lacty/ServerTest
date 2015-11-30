@@ -22,7 +22,7 @@ main()
   char buf[32];
   ssize_t n;
   int port = 73591;
-  char address[] = "127.0.0.1";
+  char address[] = "192.168.10.140";
   
   /* ソケットの作成 */
   sock = socket(AF_INET, SOCK_STREAM, 0);

@@ -40,7 +40,9 @@ int main() {
     }
     
     std::cout << str.c_str() << ":" << str.size() << std::endl;
-    write(conc_sock, str.c_str(), str.size());
+    //write(conc_sock, str.c_str(), str.size());
+    
+    send(conc_sock, str.c_str(), str.size(), 0);
     
     close(conc_sock);
   }

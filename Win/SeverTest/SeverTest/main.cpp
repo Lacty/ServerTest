@@ -17,6 +17,8 @@ main()
   int len;
   SOCKET sock;
 
+  std::string str = "教室あつい";
+
   // winsock2の初期化
   int err = WSAStartup(MAKEWORD(2, 0), &wsaData);
   if (err != 0) return -1;
@@ -38,7 +40,7 @@ main()
   sock = accept(sock0, (sockaddr*)&client, &len);
 
   // 5文字送信
-  send(sock, "HELLO", 5, 0);
+  send(sock, str.c_str(), str.size(), 0);
 
   // TCPセッション終了
   closesocket(sock);

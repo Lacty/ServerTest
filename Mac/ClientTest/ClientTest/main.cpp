@@ -21,6 +21,7 @@ main()
   int sock;
   char buf[32];
   ssize_t n;
+  int port = 73591;
   char address[] = "127.0.0.1";
   
   /* ソケットの作成 */
@@ -28,7 +29,7 @@ main()
   
   /* 接続先指定用構造体の準備 */
   server.sin_family = AF_INET;
-  server.sin_port = htons(12345);
+  server.sin_port = htons(port);
   server.sin_addr.s_addr = inet_addr(address);
   
   /* サーバに接続 */

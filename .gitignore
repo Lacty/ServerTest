@@ -1,0 +1,12 @@
+
+#--- Mac ---#
+.DS_Store
+build/
+Build/
+
+#--- Win ---#
+*.sdf
+*.suo
+*.opensdf
+Debug/
+Release/

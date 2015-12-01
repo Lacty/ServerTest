@@ -15,11 +15,17 @@ class Client {
 private:
   int sock;
   sockaddr_in addr;
-  std::string buf;
+  
+  int server_sock;
+  sockaddr_in server_addr;
+  socklen_t server_len;
+  int yes;
   
   std::thread th_send;
+  std::thread th_recieve;
   
   void send();
+  void recieve();
   
 public:
   Client();

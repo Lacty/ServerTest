@@ -6,6 +6,7 @@ Server::Server() :
 is_registered(false),
 is_update_buf(false),
 yes(1),
+th_send(&Server::send, this),
 th_recieve(&Server::receive, this)
 {
   memset(&buf, 0, sizeof(buf));
@@ -13,7 +14,33 @@ th_recieve(&Server::receive, this)
 
 
 void Server::send() {
-  
+  while(1) {
+    if (!is_update_buf) continue;
+    
+    std::string str;
+    
+    // ログを更新した人以外にログを送信
+    for (auto& member : members) {
+      if (member.name == buf_name) continue;
+      
+      // ソケット作成
+      member.sock = socket(AF_INET, SOCK_STREAM, 0);
+      if (member.sock < 0) {
+        perror("socket");
+        exit(1);
+      }
+      
+      // メンバーに接続要請
+      connect(member.sock, (sockaddr*)&member.addr, sizeof(member.addr));
+      
+      str = member.name + ":" + buf.c_str();
+      
+      std::cout << str << std::endl;
+      
+      // バッファ送信
+      write(member.sock, &str[0], str.size());
+    }
+  }
 }
 
 void Server::receive() {
@@ -42,6 +69,7 @@ void Server::receive() {
       std::cout << m.name << ":" << m.buf.c_str() << std::endl;
       
       // 配信用バッファにログをコピー
+      buf_name = m.name;
       buf = m.name + ":" + m.buf.c_str();
       
       close(m.sock);

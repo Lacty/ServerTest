@@ -25,7 +25,9 @@ private:
   int yes;
   
   std::string buf;
+  std::string buf_name;
   
+  std::thread th_send;
   std::thread th_recieve;
   
   void send();

@@ -3,6 +3,7 @@
 #include <sys/fcntl.h>  // htons()
 #include <sys/socket.h> // sockaddr socklen_t bind() accept() socket()
 #include <netinet/in.h> // sockaddr_in
+#include <arpa/inet.h>  // inet_addr() inet_ntoa()
 
 #include <ostream>
 
@@ -12,7 +13,7 @@ int main() {
   sockaddr_in addr;
   sockaddr_in client;
   socklen_t len;
-  int port = 73591;
+  int port = 79153;
   
   std::string str = "教室あついかもしれないかもしれない";
   
@@ -32,15 +33,10 @@ int main() {
     len = sizeof(client);
     conc_sock = accept(sock, (sockaddr*)&client, &len);
     
-    if (conc_sock < 0) {
-      std::cout << "accept faild" << std::endl;
-      return -1;
-    } else {
-      std::cout << "accept" << std::endl;
-    }
+    std::cout << "connect from :" << inet_ntoa(client.sin_addr) << std::endl;
+    std::cout << "port ftom :" << ntohs(client.sin_port) << std::endl;
     
-    std::cout << str.c_str() << ":" << str.size() << std::endl;
-    write(conc_sock, str.c_str(), str.size());
+    send(conc_sock, str.c_str(), str.size(), 0);
     
     close(conc_sock);
   }

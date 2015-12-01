@@ -16,12 +16,15 @@ main()
   socklen_t len;
   int sock;
   
+  std::string str;
+  std::cin >> str;
+  
   /* ソケットの作成 */
   sock0 = socket(AF_INET, SOCK_STREAM, 0);
   
   /* ソケットの設定 */
   addr.sin_family = AF_INET;
-  addr.sin_port = htons(12345);
+  addr.sin_port = htons(73591);
   addr.sin_addr.s_addr = INADDR_ANY;
   addr.sin_len = sizeof(addr);
   
@@ -35,7 +38,7 @@ main()
   sock = accept(sock0, (struct sockaddr *)&client, &len);
   
   /* 5文字送信 */
-  write(sock, "HELLO", 5);
+  write(sock, str.c_str(), str.size());
   
   /* TCPセッションの終了 */
   close(sock);

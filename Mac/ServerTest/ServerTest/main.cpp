@@ -24,7 +24,7 @@ main()
   
   /* ソケットの設定 */
   addr.sin_family = AF_INET;
-  addr.sin_port = htons(73591);
+  addr.sin_port = htons(23456);
   addr.sin_addr.s_addr = INADDR_ANY;
   addr.sin_len = sizeof(addr);
   
@@ -39,6 +39,11 @@ main()
   
   /* 5文字送信 */
   write(sock, str.c_str(), str.size());
+  
+  std::string bbb;
+  bbb.resize(BUFSIZ);
+  read(sock, &bbb[0], bbb.size());
+  std::cout << bbb << std::endl;
   
   /* TCPセッションの終了 */
   close(sock);

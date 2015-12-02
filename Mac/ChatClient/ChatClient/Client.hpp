@@ -16,16 +16,12 @@ private:
   int sock;
   sockaddr_in addr;
   
-  int server_sock;
-  sockaddr_in server_addr;
-  socklen_t server_len;
-  int yes;
+  int recv_sock;
+  sockaddr_in recv_addr;
   
   std::thread th_send;
-  std::thread th_recieve;
   
   void send();
-  void recieve();
   
 public:
   Client();

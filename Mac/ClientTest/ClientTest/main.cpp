@@ -21,7 +21,7 @@ main()
   int sock;
   char buf[32];
   ssize_t n;
-  int port = 73591;
+  int port = 23456;
   char address[] = "127.0.0.1";
   
   /* ソケットの作成 */
@@ -38,6 +38,10 @@ main()
   /* サーバからデータを受信 */
   memset(buf, 0, sizeof(buf));
   n = read(sock, buf, sizeof(buf));
+  
+  
+  //sock = socket(AF_INET, SOCK_STREAM, 0);
+  write(sock, "asdfg", 5);
   
   printf("%d, %s\n", int(n), buf);
   

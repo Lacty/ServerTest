@@ -24,7 +24,8 @@ private:
   sockaddr_in addr;
   int yes;
   
-  std::string buf;
+  int log_num;
+  
   std::string buf_name;
   
   std::thread th_send;

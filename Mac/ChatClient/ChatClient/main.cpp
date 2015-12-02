@@ -3,8 +3,8 @@
 
 
 int main() {
-  const int PORT = 79153;
-  char ip_addr[] = "192.168.10.74";
+  const int PORT = 37397;
+  char ip_addr[] = "127.0.0.1";
 
   Client client;
   

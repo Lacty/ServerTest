@@ -22,6 +22,19 @@ void Client::sendToServer() {
 
     // 送信
     send(sock, &str[0], str.size(), 0);
+
+    // recvコマンドを送った場合受信する
+    if (str == "recv") {
+      str.clear();
+      str.resize(BUFSIZ);
+      recv(sock, &str[0], str.size(), 0);
+      if (str[0] != '\0')
+        str.resize(strlen(&str[0]));
+        std::cout << str;
+    }
+
+    // ソケット封鎖
+    closesocket(sock);
   }
 }
 
